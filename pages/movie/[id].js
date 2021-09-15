@@ -9,6 +9,7 @@ import Image from 'next/image'
 export default function Movie_id() {
     const [streams, setStreams] = useState([])
     const [movieInfo, setMovieInfo] = useState({});
+    const [localCountry, setLocalCountry] = useState('')
     const router = useRouter()
     const {id} = router.query
 
@@ -21,6 +22,10 @@ export default function Movie_id() {
                 setStreams(info.streams)
                 console.log(info.streams)
             })
+            .catch(err => console.error(err))
+
+            axios.get('https://geolocation-db.com/json/')
+            .then(res => setLocalCountry(res.data.country_code))
             .catch(err => console.error(err))
         }
     }, [id])
@@ -43,9 +48,9 @@ export default function Movie_id() {
                             <div className={styles.streamingPlatforms}>
                                 <div className={styles.streamingPlatformsTitle}>Streaming Platforms</div>
                                 <div className={styles.streamingPlatformsList}>
-                                    {streams[movieInfo.localCountry]?.length > 0 
+                                    {streams[localCountry]?.length > 0 
                                     ? 
-                                    streams[movieInfo.localCountry].map((platform, index) => (
+                                    streams[localCountry].map((platform, index) => (
                                         <div className={styles.streamingPlatform}>
                                             <img src={`https://image.tmdb.org/t/p/w45${platform.logo_path}`}/>
                                             <div className={styles.streamingPlatformName}>{platform.provider_name}</div>

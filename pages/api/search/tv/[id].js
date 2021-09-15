@@ -15,11 +15,6 @@ export default async (req, res) => {
     showInfo.poster_path = show.data.poster_path
     showInfo.streams = streams
 
-    const result = await axios.get('https://geolocation-db.com/json/')
-    showInfo.localCountry = result.data.country_code
-
-    console.log(showInfo)
-
     res.status(200).send(showInfo)
 
 }
