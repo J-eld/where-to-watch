@@ -1,0 +1,103 @@
+.movieSearchRoot {
+    background: #000;
+    height: 100vh;
+    overflow: auto;
+    padding-bottom: 4rem;
+}
+
+.movieTitle {
+    color: #fff;
+    font-family: 'Bebas Neue';
+    padding-left: 1rem;
+    padding-top: 4rem;
+    font-size: 40px;
+}
+
+.movieImage {
+    padding-left: 1rem;
+    padding-top: 1rem;
+}
+
+.movieInfo {
+    display: flex;
+    gap: 2rem;
+}
+
+.streamingPlatformsAndMovieDescription {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 60%;
+}
+
+.overviewTitle, .streamingPlatformsTitle {
+    font-size: 34px;
+    font-family: 'Bebas Neue';
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.streamingPlatforms {
+    width: 40%;
+    margin-top: 0.5rem;
+    color: #fff;
+    font-size: 20px;
+}
+
+.movieDescription {
+    color: #fff;
+    font-size: 20px;
+    max-width: 500px;
+}
+
+.streamingPlatform {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Bebas Neue';
+    text-align: center;
+}
+
+.streamingPlatformsList {
+    display: flex;
+    gap: 2rem;
+}
+
+@media (max-width: 1280px) {
+    .movieSearchRoot {
+        padding: 0 1rem;
+    }
+    .movieSearchBody {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .movieInfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .movieDescription, .streamingPlatforms {
+        max-width: 500px;
+        width: 100%;
+    }
+
+    .streamingPlatformsAndMovieDescription {
+        align-items: center;
+        width: 100%;
+        row-gap: 2rem;
+    }
+
+    .movieTitle {
+        padding-left: 0;
+    }
+
+    .movieImage {
+        padding-left: 0;
+    }
+}

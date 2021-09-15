@@ -1,0 +1,21 @@
+.headerLogo {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.headerLogo div {
+    overflow: visible !important;
+}
+
+.headerLogo img:hover {
+    cursor: pointer;
+    transform: scale(1.1)
+}
+
+@media (max-width: 1280px) {
+    .headerLogo {
+        display: flex;
+        justify-content: center;
+        padding-bottom: 3rem;
+    }
+}
