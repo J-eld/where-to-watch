@@ -67,6 +67,7 @@
 @media (max-width: 1280px) {
     .movieSearchRoot {
         padding: 0 1rem;
+        padding-bottom: 3rem;
     }
     .movieSearchBody {
         display: flex;
