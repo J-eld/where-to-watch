@@ -20,7 +20,6 @@ export default function Movie_id() {
                 const info = res.data
                 setMovieInfo(info)
                 setStreams(info.streams)
-                console.log(info.streams)
             })
             .catch(err => console.error(err))
 

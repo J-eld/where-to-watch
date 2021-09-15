@@ -20,7 +20,6 @@ export default function TV_id() {
                 const info = res.data
                 setshowInfo(info)
                 setStreams(info.streams)
-                console.log(info.streams)
             })
             .catch(err => console.error(err))
 
