@@ -6,12 +6,13 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import Image from 'next/image'
 import Select from 'react-select'
+import Link from 'next/link'
 
 export default function Movie_id() {
     const [streams, setStreams] = useState([])
     const [movieInfo, setMovieInfo] = useState({});
     const [localCountry, setLocalCountry] = useState('')
-    const [countriesList, setCountriesList] = useState({})
+    const [countriesList, setCountriesList] = useState('')
     const router = useRouter()
     const {id} = router.query
 
@@ -64,6 +65,7 @@ export default function Movie_id() {
         <div className={styles.movieSearchRoot}>
             <Container maxWidth="xl">
                 <Header />
+                <Link href="/"><div className={styles.backButton}>&#10229; Back</div></Link>
                 {movieInfo.title && (
                 <div className={styles.movieSearchBody}>
                     <div className={styles.movieTitle}>

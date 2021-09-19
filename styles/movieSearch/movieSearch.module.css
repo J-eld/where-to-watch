@@ -6,11 +6,23 @@
     overflow: auto;
 }
 
+.backButton {
+    color: #fff;
+    margin-left: 1rem;
+    font-size: 18px;
+    width: fit-content;
+}
+
+.backButton:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .movieTitle {
     color: #fff;
     font-family: 'Bebas Neue';
     padding-left: 1rem;
-    padding-top: 4rem;
+    padding-top: 2rem;
     font-size: 40px;
 }
 
