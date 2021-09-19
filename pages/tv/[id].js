@@ -91,7 +91,7 @@ export default function TV_id() {
                                         </div>
                                     ))
                                     : 
-                                    'This Show is not available to stream in your country :(. Select a country from the above list to show availabilities elsewhere.'
+                                        Object.keys(countriesList).length > 0 ? 'This Show is not available to stream in your country :(. Select a country from the above list to show availabilities elsewhere.' : 'This Show is not available to stream in any country :('
                                     }
                                 </div>
                             </div>

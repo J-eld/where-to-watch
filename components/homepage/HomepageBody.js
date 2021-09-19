@@ -18,7 +18,6 @@ export default function HomepageBody() {
         axios.get(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${searchQuery}&include_adult=false`)
         .then(res => {
             searchQuery ? setSearchResult(res.data) : setSearchResult('')
-            console.log(res.data.results)
         })
         .catch(err => {
             setSearchResult('')
