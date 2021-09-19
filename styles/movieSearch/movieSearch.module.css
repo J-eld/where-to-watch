@@ -1,6 +1,8 @@
 .movieSearchRoot {
     background: #000;
-    min-height: 100vh;
+    position: absolute;
+    height: 100%;
+    width: 100%;
     overflow: auto;
 }
 
@@ -86,7 +88,6 @@
 @media (max-width: 1280px) {
     .movieSearchRoot {
         padding: 0 1rem;
-        min-height: -webkit-fill-available;
     }
     .movieSearchBody {
         display: flex;
