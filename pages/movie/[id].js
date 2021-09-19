@@ -70,7 +70,7 @@ export default function Movie_id() {
                                 <div className={styles.streamingPlatformsTitle}>Streaming Platforms</div>
                                 <div className={styles.countryList}>
                                     <span>Country: </span>
-                                    {countriesList && localCountry && <Select defaultValue={countriesList[localCountry] && new Object({value: localCountry, label: countriesList[localCountry]})} onChange={changeCountry} options={options} className={styles.reactSelectContainer} classNamePrefix={styles.reactSelect} placeholder="Select country"/>}
+                                    {countriesList && localCountry && <Select isSearchable={false} defaultValue={countriesList[localCountry] && new Object({value: localCountry, label: countriesList[localCountry]})} onChange={changeCountry} options={options} className={styles.reactSelectContainer} classNamePrefix={styles.reactSelect} placeholder="Select country"/>}
                                 </div>
                                 <div className={styles.streamingPlatformsList}>
                                     {streams[localCountry]?.length > 0 
