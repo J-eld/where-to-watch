@@ -2,7 +2,6 @@
     background: #000;
     height: 100vh;
     overflow: auto;
-    padding-bottom: 4rem;
 }
 
 .movieTitle {
@@ -37,6 +36,11 @@
     color: #fff;
 }
 
+.countryList {
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+}
+
 .streamingPlatforms {
     width: 40%;
     margin-top: 0.5rem;
@@ -64,10 +68,24 @@
     gap: 2rem;
 }
 
+.reactSelectContainer {
+    color: #000;
+    font-size: 18px;
+}
+
+.reactSelectContainer img {
+    width: 30px;
+}
+
+.reactSelectContainer div span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 @media (max-width: 1280px) {
     .movieSearchRoot {
         padding: 0 1rem;
-        padding-bottom: 3rem;
     }
     .movieSearchBody {
         display: flex;
@@ -100,5 +118,9 @@
 
     .movieImage {
         padding-left: 0;
+    }
+
+    .movieDescription {
+        padding-bottom: 3rem;
     }
 }

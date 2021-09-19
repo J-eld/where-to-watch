@@ -5,11 +5,13 @@ import Container from '@material-ui/core/Container'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import Image from 'next/image'
+import Select from 'react-select'
 
 export default function Movie_id() {
     const [streams, setStreams] = useState([])
     const [movieInfo, setMovieInfo] = useState({});
     const [localCountry, setLocalCountry] = useState('')
+    const [countriesList, setCountriesList] = useState({})
     const router = useRouter()
     const {id} = router.query
 
@@ -20,14 +22,34 @@ export default function Movie_id() {
                 const info = res.data
                 setMovieInfo(info)
                 setStreams(info.streams)
+                setCountriesList(info.countries)
             })
             .catch(err => console.error(err))
 
             axios.get('https://geolocation-db.com/json/')
-            .then(res => setLocalCountry(res.data.country_code))
+            .then(res => {
+                setLocalCountry(res.data.country_code)
+            })
             .catch(err => console.error(err))
         }
     }, [id])
+
+    const changeCountry = (e) => {
+        setLocalCountry(e.value)
+    }
+
+    const options = Object.keys(countriesList).map((country, index) => 
+    new Object(
+        {
+        'value': country, 
+        'label': <span key={index}>
+                    {countriesList[country]} 
+                    {streams[country].map((platform, index) => (
+                        <img src={`https://image.tmdb.org/t/p/w45${platform.logo_path}`}/>
+                    ))}
+                </span>  
+    }
+    ))
 
 
     return (
@@ -46,6 +68,10 @@ export default function Movie_id() {
                         <div className={styles.streamingPlatformsAndMovieDescription}>
                             <div className={styles.streamingPlatforms}>
                                 <div className={styles.streamingPlatformsTitle}>Streaming Platforms</div>
+                                <div className={styles.countryList}>
+                                    <span>Country: </span>
+                                    {countriesList && localCountry && <Select defaultValue={countriesList[localCountry] && new Object({value: localCountry, label: countriesList[localCountry]})} onChange={changeCountry} options={options} className={styles.reactSelectContainer} classNamePrefix={styles.reactSelect} placeholder="Select country"/>}
+                                </div>
                                 <div className={styles.streamingPlatformsList}>
                                     {streams[localCountry]?.length > 0 
                                     ? 
@@ -56,7 +82,7 @@ export default function Movie_id() {
                                         </div>
                                     ))
                                     : 
-                                    'This Movie is not available to stream in your country :('
+                                    'This Movie is not available to stream in your country :(. Select a country from the above list to show availabilities elsewhere.'
                                     }
                                 </div>
                             </div>

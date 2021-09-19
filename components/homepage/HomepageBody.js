@@ -34,7 +34,7 @@ export default function HomepageBody() {
                 </div>
                 <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} type="text" className={styles.searchInput} />
                 <div className={styles.searchAutocomplete}>
-                    {searchResult && searchResult.results.slice(0, 5).map((result, index) => (
+                    {searchResult && searchResult.results.slice(0, 10).map((result, index) => (
                         <Link href={`/${result.media_type}/${result.id}`}>
                         <div onClick={() => result.media_type === 'movie' ? setSearchQuery(result.title) : setSearchQuery(result.name)} key={index} className={styles.autocompleteResult}>
                             {result.media_type !== 'person' && (
