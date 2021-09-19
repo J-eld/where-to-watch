@@ -4,7 +4,7 @@
     height: stretch;
     width: 100%;
     overflow: auto;
-    padding-bottom: 1rem;
+    padding-bottom: 3rem;
 }
 
 .backButton {
@@ -67,7 +67,7 @@
     color: #fff;
     font-size: 20px;
     max-width: 500px;
-    padding-bottom: 3rem;
+    padding-bottom: 1rem;
 }
 
 .streamingPlatform {
@@ -139,7 +139,5 @@
         padding-left: 0;
     }
 
-    .movieDescription {
-        padding-bottom: 3rem;
-    }
+   
 }
