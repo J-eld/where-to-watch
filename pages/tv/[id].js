@@ -12,9 +12,10 @@ export default function TV_id() {
     const [streams, setStreams] = useState([])
     const [showInfo, setshowInfo] = useState({});
     const [localCountry, setLocalCountry] = useState('')
-    const [countriesList, setCountriesList] = useState('')
+    const [countriesList, setCountriesList] = useState({})
     const router = useRouter()
     const {id} = router.query
+    const [getCountryBlocked, setGetCountryBlocked] = useState(false)
 
     const selectStyles = {
         singleValue: styles => {
@@ -37,7 +38,10 @@ export default function TV_id() {
 
             axios.get('https://geolocation-db.com/json/')
             .then(res => setLocalCountry(res.data.country_code))
-            .catch(err => console.error(err))
+            .catch(err => {
+                console.error(err)
+                setGetCountryBlocked(true);
+            })
         }
     }, [id])
 
@@ -52,7 +56,7 @@ export default function TV_id() {
         'label': <span key={index}>
                     {countriesList[country]} 
                     {streams[country].map((platform, index) => (
-                        <img src={`https://image.tmdb.org/t/p/w45${platform.logo_path}`}/>
+                        <img key={index} src={`https://image.tmdb.org/t/p/w45${platform.logo_path}`}/>
                     ))}
                 </span>  
     }
@@ -79,20 +83,25 @@ export default function TV_id() {
                                 <div className={styles.streamingPlatformsTitle}>Streaming Platforms</div>
                                 <div className={styles.countryList}>
                                     <span>Country: </span>
-                                    {countriesList && localCountry && <Select styles={selectStyles} isSearchable={false} defaultValue={countriesList[localCountry] && new Object({value: localCountry, label: countriesList[localCountry]})} onChange={changeCountry} options={options} className={styles.reactSelectContainer} classNamePrefix={styles.reactSelect} placeholder="Select country"/>}
+                                    {(Object.keys(countriesList).length > 0 && localCountry.length > 0) || getCountryBlocked && <Select styles={selectStyles} isSearchable={false} defaultValue={countriesList[localCountry] && new Object({value: localCountry, label: countriesList[localCountry]})} onChange={changeCountry} options={options} className={styles.reactSelectContainer} classNamePrefix={styles.reactSelect} placeholder="Select country"/>}
                                 </div>
                                 <div className={styles.streamingPlatformsList}>
-                                    {streams[localCountry]?.length > 0 
-                                    ? 
-                                    streams[localCountry].map((platform, index) => (
-                                        <div className={styles.streamingPlatform}>
-                                            <img src={`https://image.tmdb.org/t/p/w45${platform.logo_path}`}/>
-                                            <div className={styles.streamingPlatformName}>{platform.provider_name}</div>
-                                        </div>
-                                    ))
-                                    : 
-                                        Object.keys(countriesList).length > 0 ? 'This Show is not available to stream in your country :(. Select a country from the above list to show availabilities elsewhere.' : 'This Show is not available to stream in any country :('
-                                    }
+                                    {!getCountryBlocked && (
+                                        localCountry.length > 0 && streams[localCountry]?.length > 0 
+                                        ? 
+                                        streams[localCountry].map((platform, index) => (
+                                            <div key={index} className={styles.streamingPlatform}>
+                                                <img src={`https://image.tmdb.org/t/p/w45${platform.logo_path}`}/>
+                                                <div className={styles.streamingPlatformName}>{platform.provider_name}</div>
+                                            </div>
+                                        ))
+                                        : 
+                                            localCountry.length > 0 && (Object.keys(countriesList).length > 0 ? 'This Show is not available to stream in your country :(. Select a country from the above list to show availabilities elsewhere.' : 'This Show is not available to stream in any country :(')
+                                
+                                    )}
+                                    {getCountryBlocked && (
+                                        <div>Something is blocking us from being able to get your current country, please feel free to browse the list of available countries above, or disable any adblockers for the best experience</div>
+                                    )}
                                 </div>
                             </div>
                             <div className={styles.movieDescription}>
