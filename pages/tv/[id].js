@@ -83,7 +83,7 @@ export default function TV_id() {
                                 <div className={styles.streamingPlatformsTitle}>Streaming Platforms</div>
                                 <div className={styles.countryList}>
                                     <span>Country: </span>
-                                    {(Object.keys(countriesList).length > 0 && localCountry.length > 0) || getCountryBlocked && <Select styles={selectStyles} isSearchable={false} defaultValue={countriesList[localCountry] && new Object({value: localCountry, label: countriesList[localCountry]})} onChange={changeCountry} options={options} className={styles.reactSelectContainer} classNamePrefix={styles.reactSelect} placeholder="Select country"/>}
+                                    {((Object.keys(countriesList).length > 0 && localCountry.length > 0) || getCountryBlocked) && <Select styles={selectStyles} isSearchable={false} defaultValue={countriesList[localCountry] && new Object({value: localCountry, label: countriesList[localCountry]})} onChange={changeCountry} options={options} className={styles.reactSelectContainer} classNamePrefix={styles.reactSelect} placeholder="Select country"/>}
                                 </div>
                                 <div className={styles.streamingPlatformsList}>
                                     {!getCountryBlocked && (
