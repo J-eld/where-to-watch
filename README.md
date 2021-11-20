@@ -6,6 +6,7 @@ This app makes use of the TMDB(The Movie Database) API to get information about 
 ## Software used
 
 - React
+- TypeScript
 - NextJS
 - TMDB API
 
