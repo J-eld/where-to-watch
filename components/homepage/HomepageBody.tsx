@@ -16,7 +16,6 @@ export const HomepageBody: React.FC = () => {
         axios.get(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${searchQuery}&include_adult=false`)
         .then(res => {
             searchQuery ? setSearchResult(res.data) : setSearchResult({results: []})
-            console.log(searchResult)
         })
         .catch(err => {
             setSearchResult({results: []})
