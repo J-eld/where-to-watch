@@ -1,29 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import styles from '/styles/movieSearch/movieSearch.module.css'
-import Header from '/components/Header'
+import { Header } from '../../components/Header'
 import Container from '@material-ui/core/Container'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import Image from 'next/image'
 import Select from 'react-select'
 import Link from 'next/link'
+import { ErrorCountryBlock } from '../../components/ErrorMessages/ErrorCountryBlock'
+import { ErrorNotAvailableInCountry } from '../../components/ErrorMessages/ErrorNotAvailableInCountry'
+import { ErrorNotAvailable } from '../../components/ErrorMessages/ErrorNotAvailable'
 
-export default function Movie_id() {
-    const [streams, setStreams] = useState([])
-    const [movieInfo, setMovieInfo] = useState({});
-    const [localCountry, setLocalCountry] = useState('')
-    const [countriesList, setCountriesList] = useState({})
+const Movie_id: React.FC = ({}) => {
+    const [streams, setStreams] = useState<any>({})
+    const [movieInfo, setMovieInfo] = useState<any>({});
+    const [localCountry, setLocalCountry] = useState<string>('')
+    const [countriesList, setCountriesList] = useState<any>({})
     const router = useRouter()
     const {id} = router.query
     const [getCountryBlocked, setGetCountryBlocked] = useState(false)
-
-    const selectStyles = {
-        singleValue: styles => {
-            return {
-                
-            }
-        }
-    }
 
     useEffect(() => {
         if (id !== undefined) {
@@ -47,23 +42,22 @@ export default function Movie_id() {
         }
     }, [id])
 
-    const changeCountry = (e) => {
+    const changeCountry = (e: any) => {
         setLocalCountry(e.value)
     }
 
-    const options = Object.keys(countriesList).map((country, index) => 
+    const options = Object.keys(countriesList).map((country: any, index: number) => 
     new Object(
         {
         'value': country, 
         'label': <span key={index}>
                     {countriesList[country]} 
-                    {streams[country].map((platform, index) => (
+                    {streams[country].map((platform: any, index: number) => (
                         <img key={index} src={`https://image.tmdb.org/t/p/w45${platform.logo_path}`}/>
                     ))}
                 </span>  
     }
     ))
-
 
     return (
         <div className={styles.movieSearchRoot}>
@@ -84,25 +78,36 @@ export default function Movie_id() {
                                 <div className={styles.streamingPlatformsTitle}>Streaming Platforms</div>
                                 <div className={styles.countryList}>
                                     <span>Country: </span>
-                                    {((Object.keys(countriesList).length > 0 && localCountry.length > 0) || getCountryBlocked) && <Select styles={selectStyles} isSearchable={false} defaultValue={countriesList[localCountry] && new Object({value: localCountry, label: countriesList[localCountry]})} onChange={changeCountry} options={options} className={styles.reactSelectContainer} classNamePrefix={styles.reactSelect} placeholder="Select country"/>}
+                                    {((Object.keys(countriesList).length > 0 && localCountry.length > 0) || getCountryBlocked) && 
+                                        <Select 
+                                        isSearchable={false} 
+                                        defaultValue={countriesList[localCountry] && new Object({value: localCountry, label: countriesList[localCountry]})} 
+                                        onChange={changeCountry} 
+                                        options={options} 
+                                        className={styles.reactSelectContainer} 
+                                        classNamePrefix={styles.reactSelect} 
+                                        placeholder="Select country"
+                                        />
+                                    }
                                 </div>
                                 <div className={styles.streamingPlatformsList}>
-                                {!getCountryBlocked && (
-                                        localCountry.length > 0 && streams[localCountry]?.length > 0 
+                                    {getCountryBlocked 
+                                    ?
+                                        <ErrorCountryBlock />
+                                    :
+                                        localCountry.length > 0 && (
+                                        streams[localCountry]?.length > 0 
                                         ? 
-                                        streams[localCountry].map((platform, index) => (
-                                            <div key={index} className={styles.streamingPlatform}>
-                                                <img src={`https://image.tmdb.org/t/p/w45${platform.logo_path}`}/>
-                                                <div className={styles.streamingPlatformName}>{platform.provider_name}</div>
-                                            </div>
-                                        ))
+                                            streams[localCountry].map((platform: any, index: number) => (
+                                                <div key={index} className={styles.streamingPlatform}>
+                                                    <img src={`https://image.tmdb.org/t/p/w45${platform.logo_path}`}/>
+                                                    <div className={styles.streamingPlatformName}>{platform.provider_name}</div>
+                                                </div>
+                                            ))
                                         : 
-                                            localCountry.length > 0 && (Object.keys(countriesList).length > 0 ? 'This Movie is not available to stream in your country :(. Select a country from the above list to show availabilities elsewhere.' : 'This Movie is not available to stream in any country :(')
-                                
-                                    )}
-                                    {getCountryBlocked && (
-                                        <div>Something is blocking us from being able to get your current country, please feel free to browse the list of available countries above, or disable any adblockers for the best experience</div>
-                                    )}
+                                            Object.keys(countriesList).length > 0 ? <ErrorNotAvailableInCountry mediaType="movie" /> : <ErrorNotAvailable mediaType="movie" />
+                                        )
+                                    }
                                 </div>
                             </div>
                             <div className={styles.movieDescription}>
@@ -115,5 +120,7 @@ export default function Movie_id() {
                 )}
             </Container>
         </div>
-    )
+    );
 }
+
+export default Movie_id
