@@ -41,43 +41,41 @@ export const HomepageBody: React.FC = () => {
         />
         <div className={styles.searchAutocomplete}>
           {searchResult &&
-            searchResult?.results
-              ?.slice(0, 10)
-              .map((result: any, index: number) => (
-                <Link key={index} href={`/${result.media_type}/${result.id}`}>
-                  <div
-                    onClick={() =>
-                      result.media_type === "movie"
-                        ? setSearchQuery(result.title)
-                        : setSearchQuery(result.name)
-                    }
-                    key={index}
-                    className={styles.autocompleteResult}
-                  >
-                    {result.media_type !== "person" &&
-                      (result.poster_path ? (
-                        <img
-                          src={`https://image.tmdb.org/t/p/w92${result.poster_path}`}
-                          width={92 / 1.5}
-                          height={138 / 1.5}
-                        />
-                      ) : (
-                        <img
-                          src={`/questionMark.png`}
-                          width={92 / 1.5}
-                          height={92 / 1.5}
-                        />
-                      ))}
-                    {result.media_type !== "person" && (
-                      <span className={styles.resultTitle}>
-                        {result.media_type === "movie"
-                          ? result.title
-                          : result.name}
-                      </span>
-                    )}
-                  </div>
-                </Link>
-              ))}
+            searchResult?.results.map((result: any, index: number) => (
+              <Link key={index} href={`/${result.media_type}/${result.id}`}>
+                <div
+                  onClick={() =>
+                    result.media_type === "movie"
+                      ? setSearchQuery(result.title)
+                      : setSearchQuery(result.name)
+                  }
+                  key={index}
+                  className={styles.autocompleteResult}
+                >
+                  {result.media_type !== "person" &&
+                    (result.poster_path ? (
+                      <img
+                        src={`https://image.tmdb.org/t/p/w92${result.poster_path}`}
+                        width={92 / 1.5}
+                        height={138 / 1.5}
+                      />
+                    ) : (
+                      <img
+                        src={`/questionMark.png`}
+                        width={92 / 1.5}
+                        height={92 / 1.5}
+                      />
+                    ))}
+                  {result.media_type !== "person" && (
+                    <span className={styles.resultTitle}>
+                      {result.media_type === "movie"
+                        ? result.title
+                        : result.name}
+                    </span>
+                  )}
+                </div>
+              </Link>
+            ))}
         </div>
       </div>
     </div>
