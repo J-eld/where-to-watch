@@ -1,144 +1,145 @@
 .movieSearchRoot {
-    background: #000;
-    position: absolute;
-    height: stretch;
-    width: 100%;
-    overflow: auto;
-    padding-bottom: 3rem;
+  background: #000;
+  position: absolute;
+  height: stretch;
+  width: 100%;
+  overflow: auto;
+  padding-bottom: 3rem;
 }
 
 .backButton {
-    color: #fff;
-    margin-left: 1rem;
-    font-size: 18px;
-    width: fit-content;
+  color: #fff;
+  margin-left: 1rem;
+  font-size: 18px;
+  width: fit-content;
 }
 
 .backButton:hover {
-    text-decoration: underline;
-    cursor: pointer;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .movieTitle {
-    color: #fff;
-    font-family: 'Bebas Neue';
-    padding-left: 1rem;
-    padding-top: 2rem;
-    font-size: 40px;
+  color: #fff;
+  font-family: "Bebas Neue";
+  padding-left: 1rem;
+  padding-top: 2rem;
+  font-size: 40px;
 }
 
 .movieImage {
-    padding-left: 1rem;
-    padding-top: 1rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
 }
 
 .movieInfo {
-    display: flex;
-    gap: 2rem;
+  display: flex;
+  gap: 2rem;
 }
 
 .streamingPlatformsAndMovieDescription {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60%;
 }
 
-.overviewTitle, .streamingPlatformsTitle {
-    font-size: 34px;
-    font-family: 'Bebas Neue';
-    margin-bottom: 1rem;
-    color: #fff;
-    margin-top: 1rem;
+.overviewTitle,
+.streamingPlatformsTitle {
+  font-size: 34px;
+  font-family: "Bebas Neue";
+  margin-bottom: 1rem;
+  color: #fff;
+  margin-top: 1rem;
 }
 
 .countryList {
-    margin-top: -1rem;
-    margin-bottom: 1rem;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
 }
 
 .streamingPlatforms {
-    width: 40%;
-    margin-top: 0.5rem;
-    color: #fff;
-    font-size: 20px;
+  width: 40%;
+  margin-top: 0.5rem;
+  color: #fff;
+  font-size: 20px;
 }
 
 .movieDescription {
-    color: #fff;
-    font-size: 20px;
-    max-width: 500px;
-    padding-bottom: 1rem;
+  color: #fff;
+  font-size: 20px;
+  max-width: 500px;
+  padding-bottom: 1rem;
 }
 
 .streamingPlatform {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Bebas Neue";
+  text-align: center;
+  width: 80px;
+}
+
+.streamingPlatformsList {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.reactSelectContainer {
+  color: #000;
+  font-size: 18px;
+}
+
+.reactSelectContainer img {
+  width: 30px;
+}
+
+.reactSelectContainer div span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1280px) {
+  .movieSearchRoot {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .movieSearchBody {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: 'Bebas Neue';
-    text-align: center;
-}
+  }
 
-.streamingPlatformsList {
+  .movieInfo {
     display: flex;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-.reactSelectContainer {
-    color: #000;
-    font-size: 18px;
-}
-
-.reactSelectContainer img {
-    width: 30px;
-}
-
-.reactSelectContainer div span {
-    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
+  }
 
-@media (max-width: 1280px) {
-    .movieSearchRoot {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-    .movieSearchBody {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+  .movieDescription,
+  .streamingPlatforms {
+    max-width: 500px;
+    width: 100%;
+  }
 
-    .movieInfo {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+  .streamingPlatformsAndMovieDescription {
+    align-items: center;
+    width: 100%;
+    row-gap: 2rem;
+  }
 
-    .movieDescription, .streamingPlatforms {
-        max-width: 500px;
-        width: 100%;
-    }
+  .movieTitle {
+    padding-left: 0;
+  }
 
-    .streamingPlatformsAndMovieDescription {
-        align-items: center;
-        width: 100%;
-        row-gap: 2rem;
-    }
-
-    .movieTitle {
-        padding-left: 0;
-    }
-
-    .movieImage {
-        padding-left: 0;
-    }
-
-   
+  .movieImage {
+    padding-left: 0;
+  }
 }
