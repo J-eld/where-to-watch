@@ -41,7 +41,6 @@ export const streamRouter = createRouter()
       contentInfo.poster_path = content.data.poster_path;
       contentInfo.streams = streams;
       contentInfo.countries = countries;
-      console.log('sdfsdf', contentInfo)
 
       return contentInfo;
     },

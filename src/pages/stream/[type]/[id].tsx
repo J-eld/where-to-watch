@@ -26,7 +26,13 @@ export default function Stream() {
   const router = useRouter();
   const type = router.query.type as string;
   const allowedTypes = ['movie', 'tv']
-  let info: infoProps;
+  let info: infoProps = {
+    title: '',
+    overview: '',
+    poster_path: '',
+    streams: {},
+    countries: {},
+  };
 
   if (typeof type === 'string' && !allowedTypes.includes(type)) {
     router.push('/404');
@@ -48,10 +54,9 @@ export default function Stream() {
       });
   }, []);
 
-  console.log('sdfsdf', info)
 
   useEffect(() => {
-    if (info) {
+    if (info.title) {
       setContentInfo(info);
       setStreams(info.streams);
       setCountriesList(info.countries);
