@@ -2,7 +2,7 @@
 import { httpBatchLink } from "@trpc/client/links/httpBatchLink";
 import { loggerLink } from "@trpc/client/links/loggerLink";
 import { withTRPC } from "@trpc/next";
-import { SessionProvider } from "next-auth/react";
+// import { SessionProvider } from "next-auth/react";
 import type { AppType } from "next/dist/shared/lib/utils";
 import Head from "next/head";
 import superjson from "superjson";
@@ -18,9 +18,9 @@ const MyApp: AppType = ({
       <Head>
           <title>Where To Watch</title>
       </Head>
-      <SessionProvider session={session}>
+      {/* <SessionProvider session={session}> */}
         <Component {...pageProps} />
-      </SessionProvider>
+      {/* </SessionProvider> */}
     </>
   );
 };
