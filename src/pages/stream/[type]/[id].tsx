@@ -56,7 +56,7 @@ export default function Stream() {
 
 
   useEffect(() => {
-    if (info.title) {
+    if (info?.title) {
       setContentInfo(info);
       setStreams(info.streams);
       setCountriesList(info.countries);
@@ -89,7 +89,7 @@ export default function Stream() {
   return (
     <div className="mx-auto flex flex-col min-h-screen py-12 px-8 max-w-screen-xl">
         <Header />
-        {contentInfo.title && (
+        {contentInfo?.title && (
           <div className="flex flex-col justify-center items-center md:items-start">
             <div className="py-8 text-4xl">{contentInfo.title}</div>
             <div className="flex flex-col gap-8 items-center max-w-xs md:flex-row md:max-w-none">
