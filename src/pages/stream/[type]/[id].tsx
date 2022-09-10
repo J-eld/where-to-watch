@@ -25,7 +25,7 @@ export default function Stream() {
   const [contentInfo, setContentInfo] = useState<any>({});
   const [localCountry, setLocalCountry] = useState<string>("");
   const [countriesList, setCountriesList] = useState<any>({});
-  const [getCountryBlocked, setGetCountryBlocked] = useState(false);
+  const [isCountryBlocked, setIsCountryBlocked] = useState(false);
 
   const router = useRouter();
   const type = router.query.type as string;
@@ -54,7 +54,7 @@ export default function Stream() {
       })
       .catch((err) => {
         console.error(err);
-        setGetCountryBlocked(true);
+        setIsCountryBlocked(true);
       });
   }, []);
 
@@ -88,6 +88,28 @@ export default function Stream() {
         ),
       })
   );
+
+  const getError = () => {
+    if (!contentInfo.title) return;
+
+    if (Object.keys(countriesList).length === 0) {
+      return (
+        <ErrorNotAvailable mediaType={type} />
+      );
+    }
+    
+    if (isCountryBlocked) {
+      return (
+        <ErrorCountryBlock />
+      );
+    }
+
+    if (!streams[localCountry] || streams[localCountry].length === 0) {
+      return (
+        <ErrorNotAvailableInCountry mediaType={type} />
+      );
+    }
+  };
 
   return (
     <div className="mx-auto flex flex-col min-h-screen py-12 px-8 max-w-screen-xl">
@@ -129,7 +151,6 @@ export default function Stream() {
                 <span>Country: </span>
                 <Select
                   isSearchable={false}
-                  isLoading={Object.keys(countriesList).length === 0}
                   defaultValue={
                     countriesList[localCountry] &&
                     new Object({
@@ -144,30 +165,21 @@ export default function Stream() {
                 />
               </div>
               <div className="flex flex-wrap gap-8">
-                {Object.keys(streams).length > 0 &&
-                  (getCountryBlocked ? (
-                    <ErrorCountryBlock />
-                  ) : localCountry.length > 0 &&
-                    streams[localCountry]?.length > 0 ? (
-                    streams[localCountry].map(
-                      (platform: any, index: number) => (
-                        <div
-                          key={index}
-                          className="flex flex-col justify-center items-center text-center w-20"
-                        >
-                          <img
-                            src={`https://image.tmdb.org/t/p/w45${platform.logo_path}`}
-                            alt={`${platform.provider_name} Logo`}
-                          />
-                          <div>{platform.provider_name}</div>
-                        </div>
-                      )
-                    )
-                  ) : Object.keys(countriesList).length > 0 ? (
-                    <ErrorNotAvailableInCountry mediaType={type} />
-                  ) : (
-                    <ErrorNotAvailable mediaType={type} />
-                  ))}
+                {streams[localCountry]?.map(
+                  (platform: any, index: number) => (
+                    <div
+                      key={index}
+                      className="flex flex-col justify-center items-center text-center w-20"
+                    >
+                      <img
+                        src={`https://image.tmdb.org/t/p/w45${platform.logo_path}`}
+                        alt={`${platform.provider_name} Logo`}
+                      />
+                      <div>{platform.provider_name}</div>
+                    </div>
+                  )
+                )}
+                {getError()}
               </div>
             </div>
             <div className="w-full max-w-screen-sm text-xl">
