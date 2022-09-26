@@ -151,7 +151,7 @@ export default function Stream() {
                 <span>Country: </span>
                 <Select
                   isSearchable={false}
-                  defaultValue={
+                  value={
                     countriesList[localCountry] &&
                     new Object({
                       value: localCountry,
