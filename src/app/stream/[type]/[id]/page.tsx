@@ -30,7 +30,7 @@ export default async function Stream({ params }: any) {
   );
 }
 
-export async function getProgramInfo(type: string, id: string) {
+async function getProgramInfo(type: string, id: string) {
   const response = await fetch(
     `https://api.themoviedb.org/3/${type}/${id}?api_key=${process.env.TMDB_API_KEY}`
   );
@@ -40,7 +40,7 @@ export async function getProgramInfo(type: string, id: string) {
   return programInfo;
 }
 
-export async function getStreamInfo(type: string, id: string) {
+async function getStreamInfo(type: string, id: string) {
   const response = await fetch(
     `https://api.themoviedb.org/3/${type}/${id}/watch/providers?api_key=${process.env.TMDB_API_KEY}`
   );
