@@ -157,7 +157,7 @@ export default function Home() {
             value={search}
             onChange={handleSearch}
             onKeyDown={handleKeyDown}
-            className="w-full p-2 border border-gray-300 rounded dark:bg-gray-800 dark:border-gray-700 dark:text-white"
+            className="font-sans w-full p-2 border border-gray-300 rounded dark:bg-gray-800 dark:border-gray-700 dark:text-white"
             placeholder="Search for a movie or TV show..."
           />
           {showDropdown && results.length > 0 && (
@@ -181,8 +181,11 @@ export default function Home() {
                       />
                     )}
                     <span>
-                      ({dayjs(result.release_date).format("YYYY")}) -{" "}
-                      {result.title || result.name}
+                      (
+                      {dayjs(
+                        result.release_date ?? result.first_air_date
+                      ).format("YYYY")}
+                      ) - {result.title || result.name}
                     </span>
                   </li>
                 ))}
