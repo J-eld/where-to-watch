@@ -79,6 +79,13 @@ const CountrySelect: React.FC<CountrySelectProps> = ({ streamInfo }) => {
 
   const providers = selectedCountry ? selectedCountry.providers : null;
 
+  const customFilter = (option: any, inputValue: string) => {
+    return option.value.country
+      .trim()
+      .toLowerCase()
+      .includes(inputValue.toLowerCase());
+  };
+
   return (
     <div>
       <Select
@@ -104,6 +111,7 @@ const CountrySelect: React.FC<CountrySelectProps> = ({ streamInfo }) => {
               }
             : null
         }
+        filterOption={customFilter}
         onChange={handleCountryChange}
         placeholder="Select a country"
         className="font-sans dark:text-black text-lg child-img:w-8 child-span:flex child-span:gap-2 child-span:items-center child-span:flex-wrap"
